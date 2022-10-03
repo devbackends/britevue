@@ -1,0 +1,98 @@
+stages:
+  - build
+  - deploy
+
+docker-build-master:
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  # Official docker image.
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
+
+docker-build-veritas:
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  # Official docker image.
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE":veritas .
+    - docker push "$CI_REGISTRY_IMAGE":veritas
+  only:
+    - veritas
+
+docker-build-prod:
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  # Official docker image.
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE":prod .
+    - docker push "$CI_REGISTRY_IMAGE":prod
+  only:
+    - prod
+
+deploy-to-kube:
+  stage: deploy
+  image: fedora:33
+  variables:
+    KUBE_NAMESPACE: bv-web-dev
+    KUBECONFIG: /etc/deploy/config
+    kube_config: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VSS2VrTkRRV2NyWjBGM1NVSkJaMGxEUW01VmQwUlJXVXBMYjFwSmFIWmpUa0ZSUlV4Q1VVRjNUWHBGVmsxQ1RVZEJNVlZGUTJoTlRWSkhiRzRLWVZoU2FHSkZPV3BhVjBaMVRWSnZkMGRCV1VSV1VWRkVSWGhHY2s5SVRtaFpXRTFuVVRKNE1XTXpVbXhqYVVKRVVWUkJaVVozTUhsTlJFVjVUVlJqZHdwT1JFazBUa1JzWVVaM01EQk5SRVY1VFZSamQwNUVTVFJPUkd4aFRVUk5lRVpVUVZSQ1owNVdRa0Z2VkVSRlVuQmFNbXd3V1ZkNFVGa3lWbWhpYWtWaENrMUNaMGRCTVZWRlFYaE5VbUY2YUhwWlYwWjZTVVZPYzJSWVRqQmFXRWxuVVRCRmQyZG5SV2xOUVRCSFExTnhSMU5KWWpORVVVVkNRVkZWUVVFMFNVSUtSSGRCZDJkblJVdEJiMGxDUVZGRVVrSmxSa2hhUkU0MFFrMVRNWFJrTlcxcGNVdFpUVXBQVkVKUk4yMXBhM2xITkdaNVRuVTRhRGdyTVdkTldURjZlZ3BOVFRSQ1ozVlVUMnRXUzJWM1ZFMHZUR054V0ZoYVIzUmtSVkozVVZaRVNHOVBOU3RPZEVKSU5qZDZSM2tyVEdReVRVMDFVMFJOWlNzdlZXSTRhamhtQ2xNMVdVUjJXVTVqSzJFMWNHWnJhRk5PTUVOWlRIaG9lbUo1UTA5dmNrUkxMMDVGUjJoQ1V6aExNM1ZYYVdSdlFsUm9Ta3Q2VkRaR0x6UnJMMkpCSzFjS1pTdGxaQ3RRVkZKR1J6VkpTVk5EUTNkRlRHSk9lRThyVFdvdlltVkZXVko1ZDNGNmVFczFhRkZxYjNrM1RYZFlPVEptWTFGMmRUZ3lVa2QzTjNwbGJ3cEJkMDA1V0dOaVZITnpVM2swWWxoVU1UTkpSRU5DVEZSaGJVcEpUa0pZUkcxTk5FNVNURGxEVDNnNGREWldWemM1Wm5oNmVUWXJXVTlMWW1wT05rSkxDaTlzVlVsVlNFVnFTMFlyYTNKMGVGUktOemhsZUVwT1JrRlVRa3RKU213NFpVODVhRUZuVFVKQlFVZHFVbFJDUkUxQk5FZEJNVlZrUkhkRlFpOTNVVVVLUVhkSlFtaHFRVk5DWjA1V1NGSk5Ra0ZtT0VWRFJFRkhRVkZJTDBGblJVRk5RakJIUVRGVlpFUm5VVmRDUWxKMlpEa3dVVXBaTjJoVlN5OWpObGRMV0FwRFNYWmxRV3RCV0RoRVFVNUNaMnR4YUd0cFJ6bDNNRUpCVVhOR1FVRlBRMEZSUlVGVlkxSkhabWREU1ZaUFdrOTRTVlJUTjNSVFQwMUtNbTFxTVZOakNucHlXalYyT0UwelRESnlaemRCYWxJMU5HZDJlRzR4ZEd0TE1XeHVOVzlpUm5nd1pVcDNMM1JUUm01TVlYQkxkR2RUUTFsbmNXWmFjMmQzV0RKUE1HRUtiR1YzWTBVclpqTjBiaTl0ZVcxVVpEZGlhek5GZWtSSWNteHlVVEZQYkdKdlVuSlBkamxLWVdwaFpGZFFUbkZ4UzBZeVRFb3daVWxpWjFaRWVHbDRUZ3A0Vm5jM2RpdDNLekZ6VmxKYU5pOHJXSHBOVlcxcU5XRk5VVWhVTkdSeFJYb3dZa0p4VmxwSVRFbzNRVlIxU1RsaWVHUmlMMms0UldoRVJIUmxkVFptQ25CaFRtMVVjMnhTTW5aeFFXdGpTMlZMVFc1RlRqVTJXRWMzUzJsQ1VFTlNWR2RzWXpsWU9FdFhkM00zWlZSTFJXMW9WWFJZU1dsTU9HNHllbkZSWWprS1JWTm1Ramt5YkhoMFZIVjBMMFZ6Ykc0MGRuQXdRVTlpV21SVFVWQnliMFEyVlVwUlJsWmtiV1JQTjFaUFdrdExZV0k1TkhkUkwxZ3ZaejA5Q2kwdExTMHRSVTVFSUVORlVsUkpSa2xEUVZSRkxTMHRMUzBLCiAgICBzZXJ2ZXI6IGh0dHBzOi8vNTljMTg3NzgtYTczZS00NWFiLWE5NmUtNThiYjYzZWRhMDJlLms4cy5vbmRpZ2l0YWxvY2Vhbi5jb20KICBuYW1lOiBkby1ueWMxLWs4cy0xLTE5LTMtZG8tMi1ueWMxLTE2MDgxNzkyOTg3MDIKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRvLW55YzEtazhzLTEtMTktMy1kby0yLW55YzEtMTYwODE3OTI5ODcwMgogICAgdXNlcjogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyLWFkbWluCiAgbmFtZTogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyCmN1cnJlbnQtY29udGV4dDogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyCmtpbmQ6IENvbmZpZwpwcmVmZXJlbmNlczoge30KdXNlcnM6Ci0gbmFtZTogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyLWFkbWluCiAgdXNlcjoKICAgIHRva2VuOiAyNTU2NjEyNzhlZTMxNWFjOGUxZTI1NjY0NjM4MmZhY2JmNGEzZWNhOWRmMjdlODJjNjQxN2NmZDIyNTdlZjViCg==
+  script:
+    - sudo dnf install -y kubernetes-client jq
+    - mkdir -p /etc/deploy
+    - echo ${kube_config} | base64 -d > ${KUBECONFIG}
+    - echo "Trying to deploy to kube... $CI_KUBERNETES_ACTIVE"
+    - kubectl delete pods -n bv-web-dev -l io.kompose.service=britevue-web
+    - kubectl delete pods -n mdt -l io.kompose.service=britevue-web
+    - echo "server at https://bv.murraydistributedtechnologies.com"
+    # Slack notification
+    - >-
+      curl -X POST --data-urlencode "payload={\"channel\": \"#devops\", \"username\": \"gitlab\", \"text\": \"Latest build viewable at https://bv.murraydistributedtechnologies.com\"}" "https://hooks.slack.com/services/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"
+  only:
+    - master
+
+
+
+deploy-to-kube-prod:
+  stage: deploy
+  image: fedora:33
+  variables:
+    KUBE_NAMESPACE: britevue
+    KUBECONFIG: /etc/deploy/config
+    kube_config: YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VSS2VrTkRRV2NyWjBGM1NVSkJaMGxEUW01VmQwUlJXVXBMYjFwSmFIWmpUa0ZSUlV4Q1VVRjNUWHBGVmsxQ1RVZEJNVlZGUTJoTlRWSkhiRzRLWVZoU2FHSkZPV3BhVjBaMVRWSnZkMGRCV1VSV1VWRkVSWGhHY2s5SVRtaFpXRTFuVVRKNE1XTXpVbXhqYVVKRVVWUkJaVVozTUhsTlJFVjVUVlJqZHdwT1JFazBUa1JzWVVaM01EQk5SRVY1VFZSamQwNUVTVFJPUkd4aFRVUk5lRVpVUVZSQ1owNVdRa0Z2VkVSRlVuQmFNbXd3V1ZkNFVGa3lWbWhpYWtWaENrMUNaMGRCTVZWRlFYaE5VbUY2YUhwWlYwWjZTVVZPYzJSWVRqQmFXRWxuVVRCRmQyZG5SV2xOUVRCSFExTnhSMU5KWWpORVVVVkNRVkZWUVVFMFNVSUtSSGRCZDJkblJVdEJiMGxDUVZGRVVrSmxSa2hhUkU0MFFrMVRNWFJrTlcxcGNVdFpUVXBQVkVKUk4yMXBhM2xITkdaNVRuVTRhRGdyTVdkTldURjZlZ3BOVFRSQ1ozVlVUMnRXUzJWM1ZFMHZUR054V0ZoYVIzUmtSVkozVVZaRVNHOVBOU3RPZEVKSU5qZDZSM2tyVEdReVRVMDFVMFJOWlNzdlZXSTRhamhtQ2xNMVdVUjJXVTVqSzJFMWNHWnJhRk5PTUVOWlRIaG9lbUo1UTA5dmNrUkxMMDVGUjJoQ1V6aExNM1ZYYVdSdlFsUm9Ta3Q2VkRaR0x6UnJMMkpCSzFjS1pTdGxaQ3RRVkZKR1J6VkpTVk5EUTNkRlRHSk9lRThyVFdvdlltVkZXVko1ZDNGNmVFczFhRkZxYjNrM1RYZFlPVEptWTFGMmRUZ3lVa2QzTjNwbGJ3cEJkMDA1V0dOaVZITnpVM2swWWxoVU1UTkpSRU5DVEZSaGJVcEpUa0pZUkcxTk5FNVNURGxEVDNnNGREWldWemM1Wm5oNmVUWXJXVTlMWW1wT05rSkxDaTlzVlVsVlNFVnFTMFlyYTNKMGVGUktOemhsZUVwT1JrRlVRa3RKU213NFpVODVhRUZuVFVKQlFVZHFVbFJDUkUxQk5FZEJNVlZrUkhkRlFpOTNVVVVLUVhkSlFtaHFRVk5DWjA1V1NGSk5Ra0ZtT0VWRFJFRkhRVkZJTDBGblJVRk5RakJIUVRGVlpFUm5VVmRDUWxKMlpEa3dVVXBaTjJoVlN5OWpObGRMV0FwRFNYWmxRV3RCV0RoRVFVNUNaMnR4YUd0cFJ6bDNNRUpCVVhOR1FVRlBRMEZSUlVGVlkxSkhabWREU1ZaUFdrOTRTVlJUTjNSVFQwMUtNbTFxTVZOakNucHlXalYyT0UwelRESnlaemRCYWxJMU5HZDJlRzR4ZEd0TE1XeHVOVzlpUm5nd1pVcDNMM1JUUm01TVlYQkxkR2RUUTFsbmNXWmFjMmQzV0RKUE1HRUtiR1YzWTBVclpqTjBiaTl0ZVcxVVpEZGlhek5GZWtSSWNteHlVVEZQYkdKdlVuSlBkamxLWVdwaFpGZFFUbkZ4UzBZeVRFb3daVWxpWjFaRWVHbDRUZ3A0Vm5jM2RpdDNLekZ6VmxKYU5pOHJXSHBOVlcxcU5XRk5VVWhVTkdSeFJYb3dZa0p4VmxwSVRFbzNRVlIxU1RsaWVHUmlMMms0UldoRVJIUmxkVFptQ25CaFRtMVVjMnhTTW5aeFFXdGpTMlZMVFc1RlRqVTJXRWMzUzJsQ1VFTlNWR2RzWXpsWU9FdFhkM00zWlZSTFJXMW9WWFJZU1dsTU9HNHllbkZSWWprS1JWTm1Ramt5YkhoMFZIVjBMMFZ6Ykc0MGRuQXdRVTlpV21SVFVWQnliMFEyVlVwUlJsWmtiV1JQTjFaUFdrdExZV0k1TkhkUkwxZ3ZaejA5Q2kwdExTMHRSVTVFSUVORlVsUkpSa2xEUVZSRkxTMHRMUzBLCiAgICBzZXJ2ZXI6IGh0dHBzOi8vNTljMTg3NzgtYTczZS00NWFiLWE5NmUtNThiYjYzZWRhMDJlLms4cy5vbmRpZ2l0YWxvY2Vhbi5jb20KICBuYW1lOiBkby1ueWMxLWs4cy0xLTE5LTMtZG8tMi1ueWMxLTE2MDgxNzkyOTg3MDIKY29udGV4dHM6Ci0gY29udGV4dDoKICAgIGNsdXN0ZXI6IGRvLW55YzEtazhzLTEtMTktMy1kby0yLW55YzEtMTYwODE3OTI5ODcwMgogICAgdXNlcjogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyLWFkbWluCiAgbmFtZTogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyCmN1cnJlbnQtY29udGV4dDogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyCmtpbmQ6IENvbmZpZwpwcmVmZXJlbmNlczoge30KdXNlcnM6Ci0gbmFtZTogZG8tbnljMS1rOHMtMS0xOS0zLWRvLTItbnljMS0xNjA4MTc5Mjk4NzAyLWFkbWluCiAgdXNlcjoKICAgIHRva2VuOiAyNTU2NjEyNzhlZTMxNWFjOGUxZTI1NjY0NjM4MmZhY2JmNGEzZWNhOWRmMjdlODJjNjQxN2NmZDIyNTdlZjViCg==
+  script:
+    - sudo dnf install -y kubernetes-client jq
+    - mkdir -p /etc/deploy
+    - echo ${kube_config} | base64 -d > ${KUBECONFIG}
+    - echo "Trying to deploy to kube... $CI_KUBERNETES_ACTIVE"
+    - kubectl delete pods -n britevue-prod -l io.kompose.service=britevue-web
+    - kubectl delete pods -n britevue-prod -l io.kompose.service=britevue-web
+    - echo "server at https://britevue.com"
+    # Slack notification
+    - >-
+      curl -X POST --data-urlencode "payload={\"channel\": \"#devops\", \"username\": \"gitlab\", \"text\": \"Latest build viewable at https://britevue.com\"}" "https://hooks.slack.com/services/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"
+  only:
+    - prod
