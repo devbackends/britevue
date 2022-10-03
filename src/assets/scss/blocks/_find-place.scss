@@ -1,0 +1,27 @@
+.find-place {
+    &__header {
+        padding-right: 0;
+        padding-left: 0;
+        @include media-breakpoint-up(lg) {
+            padding-right: 4rem;
+            padding-left: 4rem;
+        }
+        &-title {
+            margin-bottom: 1rem;
+        }
+        .search-place-form {
+            margin-bottom: 3rem;
+        }
+    }
+    &__list {
+        padding-right: 0;
+        padding-left: 0;
+        @include media-breakpoint-up(lg) {
+            padding-right: 4rem;
+            padding-left: 4rem;
+        }
+        &-loading {
+            text-align: center;
+        }
+    }
+}

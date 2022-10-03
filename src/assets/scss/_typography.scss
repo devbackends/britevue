@@ -1,0 +1,40 @@
+$font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-paragraph: "Nunito", $font-sans-serif;
+$font-heading: "Montserrat", $font-sans-serif;
+
+
+$font-xxxl: 4rem;
+$font-xxl: 3rem;
+$font-xl: 2.25rem;
+$font-lg: 1.5rem;
+$font-md: 1rem;
+$font-sm: 0.75rem;
+
+%paragraph-lg {
+    font-family: $font-paragraph;
+    font-size: $font-lg;
+}
+
+%paragraph-xl {
+    font-family: $font-paragraph;
+    font-size: $font-lg;
+}
+
+/* a {
+    color: $color-secondary;
+    &:hover {
+        color: darken($color-secondary, 10%);
+    }
+} */
+.paragraph-lg {
+    @extend %paragraph-lg;
+}
+
+.paragraph-xl {
+    @extend %paragraph-xl;
+}
+
+.paragraph-bold-xl {
+    @extend %paragraph-xl;
+    font-weight: bold;
+}

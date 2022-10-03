@@ -1,0 +1,14 @@
+.dashboard-layout{
+  position: relative;
+  margin: 62px 0 0 0;
+  min-height: 77vh;
+  .page-content{
+    padding: 4rem 0;
+    @include small(){
+      padding: 4rem 0;
+    }
+    @include tablet(){
+      padding: 2rem 6rem;
+    }
+  }
+}

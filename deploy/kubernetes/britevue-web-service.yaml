@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f podman-compose-all.yml convert
+    kompose.version: 1.17.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: britevue-web
+  name: britevue-web
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8080"
+    port: 80
+    targetPort: 8080
+  selector:
+    io.kompose.service: britevue-web
+status:
+  loadBalancer: {}

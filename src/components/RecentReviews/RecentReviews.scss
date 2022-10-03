@@ -1,0 +1,99 @@
+.recent-reviews{
+  .card{
+    border-radius: 8px;
+    .card-header{
+      padding: 10px 10px 5px 10px;
+      .avatar-con{
+        min-width: 40px;
+        max-width: 60px;
+        height: auto;
+        img{
+          border-radius: 50%;
+        }
+      }
+      .name-con{
+        margin-left: 25px;
+      }
+      .name{
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px;
+        color: $color-secondary;
+        margin: 0;
+      }
+      .review-date-con{
+        max-width: unset;
+        min-width: 188px;
+      }
+      .review-date{
+        text-align: left;
+        font-size: 12px;
+        margin: 0;
+      }
+      .user-rep{
+        font-family: $font-family-objektiv-regular;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: right;
+        color: $gray-600;
+      }
+    }
+    .card-body{
+      padding: 0 10px;
+      text-align: left;
+      margin-bottom: 20px;
+      .card-title{
+        color: $color-secondary;
+        margin: 15px 0;
+        font-size: 16px;
+      }
+    }
+    .divider{
+      display: block;
+      border-top: solid 1px $gray-400;
+      margin: 10px;
+    }
+    .card-footer{
+      text-align: left;
+      padding-top: 0;
+      border: none;
+      background: none;
+      .coin{
+        font-size: 20px;
+        color: $primary;
+        margin-right: 10px;
+      }
+    }
+    .card-icon{
+      min-width: 60px;
+      img{
+        padding: 0 0 7px 0;
+      }
+      .icon-text{
+        padding: 0 4px;
+        font-weight: bold;
+      }
+    }
+  }
+  .show-more{
+    margin: 100px 0 0 0;
+    padding: 0;
+    font-weight: bold;
+    p{
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.clickable{
+  cursor: pointer;
+}

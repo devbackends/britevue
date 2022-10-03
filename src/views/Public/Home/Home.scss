@@ -1,0 +1,121 @@
+.home{
+  //background: $my_var;
+  .section-1{
+    .left-col{
+      color: $primary;
+      font-weight: bold;
+      h1{
+        font-weight: bold;
+        font-size: 64px;
+      }
+    }
+    .right-col{
+      p{
+        font-size: 24px;
+        @media only screen and (max-width: 767px) {
+          text-align: center;
+        }
+      }
+    }
+  }
+  .section-2{
+    padding-top: 30px;
+    padding-bottom: 80px;
+    p{
+      color: $white;
+      font-size: 24px;
+    }
+    .hc-btn-txt{
+      color: $color-handcash;
+      font-weight: bold;
+    }
+    button.sign-me-up{
+      color: $color-handcash;
+      margin: 20px 0px;
+      font-weight: bold;
+      font-size: 24px;
+      padding: 10px 40px;
+      border-radius: 6px;
+      height: 62px;
+    }
+  }
+  .section-3{
+    .sec-3-card{
+      .sec-3-card-header{
+        margin: 15px 0;
+        h3{
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .section-4{
+    background: #E0E0E0;
+    position: relative;
+    padding: 4rem 14rem;
+
+
+    .sec-4-header{
+      margin: 2.5rem 0 3.5rem 0;
+      text-align: center;
+      h3{
+        font-weight: bold;
+        font-size: $font-xl;
+      }
+    }
+    .recent-reviews{
+
+    }
+    @media only screen and (max-width: 1199px) {
+      padding: 2rem 0rem;
+    }
+  }
+  .activities-icon {
+    width: 100%;
+    position: relative;
+    z-index: 9;
+    img {
+      position: absolute;
+      width: 46px;
+      height: 58px;
+      left: calc(50% - 23px);
+      top: -29px;
+    }
+  }
+}
+#activities-icon {
+
+}
+
+.home-intro {
+  &__title {
+    font-size: $font-xxl;
+    color: $color-primary;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-xl;
+      text-align: center;
+    }
+  }
+  &__description {
+    p {
+      @include media-breakpoint-down(sm) {
+        font-size: $font-md;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.home-handcash {
+  background: $color-black;
+  text-align: center;
+  &__text {
+    p {
+      @extend %paragraph-lg;
+      color: $color-white;
+      @include media-breakpoint-down(sm) {
+        font-size: $font-md;
+      }
+    }
+  }
+}

@@ -1,0 +1,438 @@
+.place{
+  width: 100%;
+  height: 100%;
+  .left-col{
+    .left-col{
+      .place-actions{
+        button.btn{
+          color: $primary;
+          font-size: 24px;
+          padding: 0;
+          position: relative;
+          width: 60px;
+          min-width: unset;
+          &:focus{
+            box-shadow: none;
+          }
+          .favorite-tooltip, .link-tooltip{
+            opacity: 0;
+            position: absolute;
+            top: -140%;
+            left: -287%;
+            min-width: 150px;
+            padding: 7px 5px;
+            background: $dark;
+            font-size: 16px;
+            color: $white;
+            border-radius: 8px;
+            transition: opacity ease-in-out 200ms;
+            &:after{
+              content: "";
+              display: block;
+              position: absolute;
+              top: 31px;
+              left: 44%;
+              width: 30px;
+              height: 35px;
+              background: $dark;
+              -webkit-clip-path: polygon(50% 42%, 0 0, 100% 0);
+              clip-path: polygon(50% 42%, 0 0, 100% 0);
+            }
+          }
+          .link-tooltip{
+            min-width: 80px;
+            width: 95px;
+            left: -133%;
+            &:after{
+              left: 35%;
+            }
+          }
+        }
+        button.btn:hover{
+          .favorite-tooltip, .link-tooltip{
+            opacity: 1;
+          }
+        }
+        .favorite{
+          margin-right: 15px;
+
+        }
+      }
+      .main-rating-con{
+        img{
+          margin: 0 5px 15px 0;
+          width: 34px;
+          height: 34px;
+        }
+        .main-rating{
+          display: inline-block;
+          font-size: 24px;
+          font-weight: bold;
+          span.reviews-count{
+            color: $gray-500;
+            font-weight: bold;
+          }
+        }
+      }
+      ul.rating-details{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        color: $gray-700;
+        font-weight: bold;
+        li{
+          margin: 0 15px 0 0 ;
+          padding: 0;
+          float: left;
+          img{
+            margin-bottom: 3px;
+          }
+        }
+      }
+      ul.features{
+        list-style: none;
+        margin: 25px 0 0 0;
+        padding: 0;
+        li{
+          margin: 0 15px 0 0 ;
+          padding: 0;
+          float: left;
+          color: $gray-600;
+          img{
+            margin-bottom: 3px;
+          }
+        }
+        li.divider{
+          height: 20px;
+          border-left: solid 1px $gray-500;
+        }
+      }
+      .description{
+        margin-top: 20px;
+        font-size: 24px;
+        max-width: 95%;
+        p{
+          margin: 0;
+        }
+        button.write-review{
+          font-size: 24px;
+          font-weight: bold;
+          margin: 35px 0;
+          padding: 12px 15px;
+          height:62px;
+        }
+        a.btn-outline-primary{
+          color: black;
+          font-weight: bold;
+          height: 44px;
+          .camera-icon{
+            font-size: 20px;
+            font-weight: bold;
+          }
+          .button-text{
+            font-weight: bold;
+            font-size: 16px;
+            padding-left:10px;
+          }
+        }
+        a.btn-outline-primary:hover{
+          background-color: transparent;
+          border-collapse: #cc7a00;
+          outline: #cc7a00;
+        }
+
+      }
+      .reviews{
+        h3.title{
+          margin-bottom: 20px;
+        }
+        .sort{
+          width: 65%;
+          height: 45px;
+          background: url("~@/assets/images/arrow_down_thick.svg") no-repeat right 0.75rem center/15px 10px;
+          &:focus{
+            box-shadow: none;
+            border-color: $primary;
+          }
+        }
+        .review{
+          padding: 15px;
+          border: solid 1px $gray-500;
+          border-radius: 5px;
+          margin-bottom: 15px;
+          .left-col img{
+            max-width: 100%;
+            height: auto;
+            min-width: 120px;
+            min-height: 120px;
+          }
+          .right-col{
+            padding-left: 45px;
+            .person-img{
+              @include person-img(40px, 40px);
+            }
+            .name{
+              color: $color-secondary-dark;
+              font-weight: bold;
+              margin: 8px 0 0 13px;
+            }
+            .date{
+              margin: 8px 0 0 0;
+              color: $gray-700;
+            }
+            .rating-con{
+              margin-top: 10px;
+              .icon{
+                margin: 0 5px 7px 0;
+              }
+            }
+            .score-con{
+              margin-top: 10px;
+            }
+            .review-body{
+              p{
+                margin: 0;
+              }
+              .read-more{
+                padding-left: 2px;
+                color: $color-secondary;
+              }
+            }
+            .divider{
+              display: block;
+              border-bottom: solid 1px $gray-500;
+              margin: 10px 0;
+            }
+            .actions-left{
+              ul.actions{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                li{
+                  float: left;
+                  margin: 0;
+                  padding: 0 10px;
+                  img{
+                    margin: 0 5px 6px 0;
+                  }
+                }
+              }
+            }
+            .actions-right{
+              .earns{
+                margin-right: 10px;
+              }
+              ::v-deep button.tip-trigger{
+                font-size: 20px;
+                color: $primary;
+                margin: 0;
+                padding: 0;
+              }
+            }
+          }
+        }
+        .load-more{
+          margin: 40px 0;
+          text-align: center;
+          font-weight: bold;
+        }
+      }
+    }
+    .right-col.place-details{
+      padding: 0 27px 0 25px;
+      .address{
+        margin-top: 75px;
+      }
+      .website{
+        margin-bottom: 15px;
+        a{
+          color: $color-secondary;
+          font-weight: bold;
+          &:hover{
+            text-decoration: none;
+            color: $color-secondary;
+          }
+        }
+      }
+      .phone{
+        margin-bottom: 15px;
+      }
+      .schedule{
+        .schedule-header{
+          color: $success;
+          span{
+            color: $color-black;
+          }
+        }
+        .schedule-days{
+          margin: 5px 0;
+          p{
+            margin: 0;
+            color: $gray-600;
+          }
+          .is_today{
+            color: $color-black;
+            font-weight: bold;
+          }
+        }
+      }
+      .photos{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 40px -5px -5px -5px;
+        .photo{
+          flex: 80px;
+          max-height: 80px;
+          margin: 5px;
+          position: relative;
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          .img-overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            .img-text{
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+              color: $white;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+  .map-con{
+    width: 30%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    #map{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+
+.image-dragger-container {
+  border:2px dashed #9D9D9D;
+  text-align: center;
+  height: auto;
+  .drag-container{
+    text-align: center;
+    .file-wrapper {
+      text-align: center;
+      width: 100%;
+      vertical-align: middle;
+      position: absolute;
+      overflow: hidden;
+      height: 200px;
+      top: 0px;
+      input {
+        position: absolute;
+        top: 0;
+        right: 0; /* not left, because only the right part of the input seems to
+                 be clickable in some browser I can't remember */
+        cursor: pointer;
+        opacity: 0.0;
+        width: 100%;
+        filter: alpha(opacity=0); /* and all the other old opacity stuff you
+                                 want to support */
+        font-size: 300px; /* wtf, but apparently the most reliable way to make
+                        a large part of the input clickable in most browsers */
+        height: 200px;
+      }
+    }
+    ul{
+      li{
+        list-style: none;
+        span{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.images-container{
+  .image-container{
+    .delete-image{
+      font-size: 22px;
+      text-align: center;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      background-color: white;
+      border-radius: 25px;
+    }
+    textarea{
+      width: 100%;border: 1px solid #9E9E9E;box-sizing: border-box;border-radius: 4px; padding: 10px;
+    }
+  }
+}
+
+
+/* .custom-tooltip{
+  position: relative;
+  display: inline-block;
+
+}
+.custom-tooltip .custom-tooltip-text{
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  opacity: 0.7;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  font-size: 14px;
+  padding: 8px;
+}
+.custom-tooltip:hover .custom-tooltip-text{
+  visibility: visible;
+} */
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.purchase{
+  position: absolute;
+   top: 30%;
+   left: 40%;
+   font-weight: bold;
+   font-size: 16px;
+   z-index:10;
+ }
+ .purchase:hover{
+   background-color: transparent;
+   border-collapse: #cc7a00;
+   outline: #cc7a00;
+ }
+.place-detail__info-photos-item{
+  img{cursor:pointer;}
+}
+.clickable{
+  cursor: pointer;
+}

@@ -1,0 +1,46 @@
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+);
+// custom mixins:
+@mixin small(){
+  @media only screen and (min-width: map-get($grid-breakpoints, 'xs')) {
+    @content;
+  }
+}
+@mixin mobile(){
+  @media only screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    @content;
+  }
+}
+@mixin tablet(){
+  @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @content;
+  }
+}
+@mixin desktop(){
+  @media only screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    @content;
+  }
+}
+@mixin fluid-img($width, $height){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: $width;
+  max-height: $height;
+  img{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+@mixin person-img($width, $height){
+  @include fluid-img($width, $height);
+  border-radius: 50%;
+}

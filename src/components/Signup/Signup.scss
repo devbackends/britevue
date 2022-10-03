@@ -1,0 +1,64 @@
+#signup-modal{
+  .modal-dialog{
+    @include desktop{
+      width: 630px;
+    }
+  }
+  .container-fluid{
+    padding: 0;
+  }
+  .modal-header, .modal-footer{
+    border: none;
+  }
+  .modal-header{
+    justify-content: center;
+    padding-bottom: 0;
+    position: relative;
+    .modal-title{
+      margin: 25px 0 0 0;
+      font-weight: 700;
+    }
+    .close {
+      opacity: 1;
+      z-index: 2;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      span{
+        font-weight: normal;
+        font-size: 30px;
+      }
+    }
+  }
+  .modal-body {
+    padding-bottom: 0;
+    .signup-input{
+      margin: 0 50px;
+    }
+    .form-control{
+      margin-bottom: 7px;
+    }
+  }
+  .modal-footer{
+    justify-content: center;
+    text-align: center;
+    .singup-text{
+      margin: 30px 0;
+      font-weight: bold;
+      p{
+        margin: 10px;
+      }
+      span{
+        color: $color-secondary;
+      }
+      button.signup-moneybutton{
+        background-color: #4872F6;
+        border-color: #4872F6;
+        img{
+          max-width: 30px;
+          height: auto;
+        }
+      }
+    }
+  }
+}

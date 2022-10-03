@@ -1,0 +1,42 @@
+.custom-tooltip{
+    position: relative;
+    display: inline-block;
+  }
+  .custom-tooltip .custom-tooltip-text{
+    visibility: hidden;
+    width: 200px;
+    background: rgba($color-black, 0.9);
+    opacity: 1;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    position: absolute;
+    z-index: 9999;
+    bottom: calc(100% + 15px);
+    left: 50%;
+    margin-left: -100px;
+    line-height: initial;
+    font-weight: normal;
+    width: 0;
+    &-top {
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            margin-left: -12px;
+            width: 12px; 
+            height: 12px;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            
+            border-top: 12px solid rgba($color-black, 0.9);
+        }
+    }
+  }
+  .custom-tooltip:hover .custom-tooltip-text{
+    visibility: visible;
+    width: 200px;
+  }

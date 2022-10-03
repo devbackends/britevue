@@ -1,0 +1,35 @@
+.side-info-item {
+    margin-bottom: 1rem;
+    &__image {
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        object-fit: cover;
+    }
+    &__content {}
+    &__name {
+        margin-bottom: 0.125rem;
+        font-weight: bold;
+        display: block;
+        line-height: 1;
+        color: $color-secondary;
+        &:hover {
+            color: darken($color-secondary, 10%);
+        }
+    }
+    &__info {
+        font-size: $font-md;
+        margin-bottom: 0;
+    }
+    &__rating {
+        font-size: $font-md;
+        color: $color-black;
+        font-weight: bold;
+        &-count {
+            color: $color-gray-500;
+        }
+        img {
+
+        }
+    }
+}

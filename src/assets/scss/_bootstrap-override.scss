@@ -1,0 +1,27 @@
+  
+$yiq-text-dark:               $color-white;
+$border-radius:               5px;
+$border-radius-lg:            5px;
+$border-radius-sm:            5px;
+$input-btn-border-width:      2px;
+$modal-backdrop-bg:                 rgba($color-black, 0.5);
+$modal-backdrop-opacity:            .5;
+$font-family-sans-serif:      $font-sans-serif;
+$headings-font-family:        $font-heading;
+$font-family-base:            $font-paragraph;
+$font-family-objektiv-regular: Objektiv-Regular, $font-family-sans-serif;
+$font-family-lato-regular: Lato, $font-family-sans-serif;
+
+$input-border-width:                    1px;
+$input-border-radius:                   5px;
+$input-border-radius-lg:                5px;
+$input-border-radius-sm:                5px;
+$btn-focus-width:             0;
+
+// Headings overrides:
+$headings-font-family:        $headings-font-family;
+$headings-font-weight:        bold;
+$h1-font-size:                64px;
+$h2-font-size:                48px;
+$h3-font-size:                36px;
+$h4-font-size:                24px;

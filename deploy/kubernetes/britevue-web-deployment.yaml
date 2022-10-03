@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: britevue-web
+  name: britevue-web
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: britevue-web
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: britevue-web
+    spec:
+      imagePullSecrets:
+      - name: gitlab-registry
+      containers:
+      - env:
+        - name: VUE_APP_BV_API_HOST
+          value: britevue
+        - name: VUE_APP_BV_API_PORT
+          value: "4000"
+        command:
+        - nginx
+        - -g
+        - "daemon off;"
+        image: registry.gitlab.com/devvly/britevue-frontend:latest
+        imagePullPolicy: Always
+        name: bv-web
+        ports:
+        - containerPort: 8080
+        resources: {}
+        stdin: true
+      restartPolicy: Always
+status: {}

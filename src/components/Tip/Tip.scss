@@ -1,0 +1,197 @@
+[id^=tip_modal_]{
+  .modal-dialog{
+    text-align: center;
+    max-width: 200px;
+    &:after{
+      content: "";
+      display: block;
+      position: relative;
+      top: -4px;
+      left: 82%;
+      width: 20px;
+      height: 30px;
+      background: $light;
+      -webkit-clip-path: polygon(50% 30%, 0 0, 100% 0);
+      clip-path: polygon(50% 42%, 0 0, 100% 0);
+    }
+    .modal-content{
+      border-radius: 10px;
+      .icon{
+        font-size: 28px;
+        color: $primary;
+      }
+      .tip-title{
+        margin-bottom: 10px;
+      }
+    }
+    .modal-header,.modal-footer{
+      border-bottom: none;
+      border-top: none;
+      padding: 0;
+    }
+  }
+  .modal-backdrop{
+    background: $color-black;
+    opacity: .5;
+  }
+}
+.tip{
+  .tip-trigger{
+    font-size: 1.5rem !important;
+    color: $color-primary;
+    &:hover {
+      color: darken($color-primary, 10%);
+    }
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  &-popover-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($color-black, 0.5);
+    z-index: 10;
+    display: none;
+    &--opened {
+      display: block;
+    }
+  }
+}
+.tip-btn-con{
+  width: 145px;
+  height: 50px;
+  border: solid 1px #D9D8D8;
+  background: #F2EFEF;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  &:focus{
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+  .tip-inner{
+    position: relative;
+    width: 95%;
+    height: 80%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    background: $light;
+    border: solid 1px #A8A8A8;
+    border-radius: 30px;
+    .tip-btn{
+      position: absolute;
+      background-color: $primary;
+      width: 30px;
+      height: 30px;
+      left: 4%;
+      top: 10%;
+      border: solid 5px $light;
+      border-radius: 50%;
+      -webkit-box-shadow: 5px 1px 6px -3px $gray-600;
+      box-shadow: 5px 1px 6px -3px $gray-600;
+      padding: 0;
+      transition: background-color ease-in-out 200ms;
+    }
+    .tip-btn[disabled]{
+      background-color: $gray-500;
+    }
+    input.tip-input{
+      position: relative;
+      left: 6%;
+      align-self: center;
+      width: 50%;
+      height: 70%;
+      padding: 5px 8px;
+      background: $light;
+      border: solid 1px $gray-500;
+      border-radius: 30px;
+      box-shadow: none;
+      text-align: left;
+      font-size: 12px;
+      font-weight: bold;
+      color: $gray-600;
+      &:focus{
+        box-shadow: none;
+        outline: none;
+      }
+    }
+    // remove arrow:
+    /* Chrome, Safari, Edge, Opera */
+    input.tip-input::-webkit-outer-spin-button,
+    input.tip-input::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Firefox */
+    input.tip-input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .currency{
+      position: absolute;
+      top: 25%;
+      right: 31px;
+      font-size: 12px;
+      font-weight: bold;
+      color: $gray-600;
+      opacity: 0;
+      transition: opacity ease-in-out 150ms;
+      &.show{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.popover {
+  border: none;
+  border-radius: 0.5rem;
+  .popover-body {
+    padding: 0.75rem 0.75rem;
+    .icon {
+      font-size: 1.5rem;
+      color: $color-primary;
+      text-align: center;
+    }
+    .tip-title {
+      text-align: center;
+      font-size: $font-md;
+      margin-bottom: 0.5rem;
+    }
+  }
+  .tip-form {
+    .form-control {
+      height: auto;
+      width: 70px;
+      border-left: none;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      
+      /* Firefox */
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
+    }
+    .input-group-text {
+      background: transparent;
+      padding-right: 0;
+    }
+    .btn {
+      img {
+        height: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.home{
+  //background: $my_var;a
+}
+.home-intro {
+  &__title {
+    font-size: $font-xxl;
+    color: $color-primary;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-xl;
+      text-align: center;
+    }
+  }
+  &__description {
+    p {
+      @include media-breakpoint-down(sm) {
+        font-size: $font-md;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.home-handcash {
+  background: $color-black;
+  text-align: center;
+  &__text {
+    p {
+      @extend %paragraph-lg;
+      color: $color-white;
+      @include media-breakpoint-down(sm) {
+        font-size: $font-md;
+      }
+    }
+  }
+}

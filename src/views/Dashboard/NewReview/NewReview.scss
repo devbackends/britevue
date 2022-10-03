@@ -1,0 +1,201 @@
+.spinner {
+  color: $color-secondary;
+}
+.new-review{
+  width: 100%;
+  height: 100%;
+  .place_name{
+    cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      font-size: 2rem;
+    }
+  }
+  .place-actions{
+    margin-left: 20px;
+    button.btn{
+      color: $primary;
+      font-size: 24px;
+      padding: 0;
+      position: relative;
+    }
+  }
+  .rating{
+    margin-top: 30px;
+    .rating-item{
+      display: flex;
+      flex-direction: column;
+      p.rating-text{
+        margin: 0;
+        color: $color-black;
+        font-weight: bold;
+      }
+      ul.rating-stars{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        li{
+          float: left;
+          margin: 0;
+          padding: 0 5px 0 0;
+          span.star{
+            display: block;
+            background: url("~@/assets/images/star_grey_outline.svg") center/28px 27px no-repeat;
+            width: 28px;
+            height: 27px;
+            cursor: pointer;
+            transition: all ease-in-out 200ms;
+            &.active{
+              background: url("~@/assets/images/star_large.svg") center/28px 27px no-repeat;
+            }
+          }
+        }
+        li:last-child{
+          padding: 0;
+        }
+      }
+      .rating-description{
+        margin-top: 3px;
+        min-height: 25px;
+      }
+    }
+  }
+  .review-body{
+    min-height: 90px;
+  }
+  .rating-result{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    @include media-breakpoint-up(lg) {
+      align-self: start;
+    }
+    .icon{
+      font-size: 36px;
+      margin-right: 1rem;
+    }
+    h1{
+      font-size: 48px;
+      margin-left: 20px;
+      font-family: $font-family-lato-regular;
+    }
+  }
+  .paywall{
+    margin-top: 20px;
+  }
+  .paywall-money{
+    position: relative;
+    top: 40px;
+    right: 25px;
+  }
+  .submit-review{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 35px;
+    padding: 12px 15px;
+    height: 62px;
+  }
+  .form-container{
+
+    .image-dragger-container {
+
+      text-align: center;
+      height: auto;
+      position: relative;
+      .image-file-input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+      }
+      .drag-container{
+        text-align: center;
+        border: 2px dashed #9D9D9D;
+        height: auto;
+        max-width: 100%;
+        padding: 2rem;
+        border-radius: 4px;
+        .file-wrapper {
+          position: relative;
+          text-align: center;
+          width: 100%;
+          vertical-align: middle;
+          position: absolute;
+          overflow: hidden;
+          height: 200px;
+          top: 0px;
+          input {
+            position: absolute;
+            top: 0;
+            right: 0; /* not left, because only the right part of the input seems to
+                 be clickable in some browser I can't remember */
+            cursor: pointer;
+            opacity: 0.0;
+            width: 100%;
+            filter: alpha(opacity=0); /* and all the other old opacity stuff you
+                                 want to support */
+            font-size: 300px; /* wtf, but apparently the most reliable way to make
+                        a large part of the input clickable in most browsers */
+            height: 200px;
+          }
+        }
+        ul{
+          margin-bottom: 0;
+          padding-left: 0;
+          li{
+            list-style: none;
+            span{
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__paywall-money {
+
+    label {
+      font-size: $font-lg;
+      font-weight: bold;
+      svg {
+        color: $color-secondary;
+        cursor: pointer;
+        &:hover {
+          color: $color-secondary-dark;
+        }
+      }
+    }
+    .input-group {
+      input {
+        font-size: $font-lg;
+        border-left: none;
+        padding-left: 0;
+        color: $color-secondary-dark;
+        &::placeholder {
+          color: $color-gray-500;
+        }
+      }
+      .input-group-text {
+        font-size: $font-lg;
+        background: transparent;
+        color: $color-black;
+      }
+    }
+  }
+  &__side-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 100%;
+    overflow: visible;
+  }
+  &__side-sticky {
+    position: -webkit-sticky i !important;
+    position: sticky !important;
+    top: 72px;
+    width: 100%;
+  }
+}

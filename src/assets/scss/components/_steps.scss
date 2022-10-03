@@ -1,0 +1,27 @@
+.steps {
+    &__item {
+        color: $color-gray-500;
+        @include media-breakpoint-down(sm) {
+            text-align: center;
+          }
+        &--active {
+            color: $color-black;
+        }
+        &--success {
+            color: $color-success;
+        }
+        &-check {
+            color: $color-success;
+            margin-left: 0.75rem;
+        }
+        &-chevron {
+            color: $color-gray-500;
+        }
+        &-title {
+            font-size: 1.125rem;
+            margin-bottom: 0;
+            font-weight: bold;
+            display: inline-block;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+.alert-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 400px;
+    z-index: 1500;
+    @include media-breakpoint-down(md) {
+        width: calc(100% - 2rem);
+        right: 1rem;
+        left: 1rem;
+    }
+  }
